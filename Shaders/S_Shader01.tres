@@ -1,0 +1,85 @@
+[gd_resource type="VisualShader" format=3 uid="uid://s1ic0fn4v5d7"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_kosuo"]
+parameter_name = "Mask"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_l1hqx"]
+source = 5
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_t6vp8"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_tiu8k"]
+parameter_name = "MainTex2"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_kosuo"]
+source = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_l1hqx"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_cxgm1"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_t6vp8"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7r18h"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_8yxhe"]
+parameter_name = "Speed"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_g5yhi"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_5qfnt"]
+parameter_name = "MainTex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_jd0wa"]
+source = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_l17f4"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_fu26q"]
+operator = 2
+
+[resource]
+modes/blend = 1
+modes/cull = 2
+flags/unshaded = true
+nodes/vertex/0/position = Vector2(960, 182.85715)
+nodes/vertex/2/node = SubResource("VisualShaderNodeTexture2DParameter_5qfnt")
+nodes/vertex/2/position = Vector2(141.26578, 368.66705)
+nodes/vertex/3/node = SubResource("VisualShaderNodeTexture_jd0wa")
+nodes/vertex/3/position = Vector2(457.14285, 354.2857)
+nodes/vertex/4/node = SubResource("VisualShaderNodeInput_l17f4")
+nodes/vertex/4/position = Vector2(594.2857, 160)
+nodes/vertex/5/node = SubResource("VisualShaderNodeFloatOp_fu26q")
+nodes/vertex/5/position = Vector2(742.8571, 320)
+nodes/vertex/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 5, 1, 4, 0, 5, 0, 5, 0, 0, 7)
+nodes/fragment/0/position = Vector2(834.2857, 68.57143)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_tiu8k")
+nodes/fragment/2/position = Vector2(-182.85715, 251.42857)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_kosuo")
+nodes/fragment/3/position = Vector2(102.85714, 262.85715)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_l1hqx")
+nodes/fragment/4/position = Vector2(80, 34.285713)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatOp_cxgm1")
+nodes/fragment/5/position = Vector2(502.85715, 228.57143)
+nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_t6vp8")
+nodes/fragment/6/position = Vector2(-194.28572, 57.142857)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_7r18h")
+nodes/fragment/7/position = Vector2(-811.4286, 11.428572)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVec2Parameter_8yxhe")
+nodes/fragment/8/position = Vector2(-800, 182.85715)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_g5yhi")
+nodes/fragment/9/position = Vector2(-445.7143, 68.57143)
+nodes/fragment/10/node = SubResource("VisualShaderNodeTexture2DParameter_kosuo")
+nodes/fragment/10/position = Vector2(-217.14285, 742.8571)
+nodes/fragment/11/node = SubResource("VisualShaderNodeTexture_l1hqx")
+nodes/fragment/11/position = Vector2(68.57143, 754.2857)
+nodes/fragment/12/node = SubResource("VisualShaderNodeFloatOp_t6vp8")
+nodes/fragment/12/position = Vector2(308.57144, 502.85715)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 6, 0, 3, 0, 8, 0, 9, 1, 7, 0, 9, 0, 9, 0, 6, 2, 10, 0, 11, 2, 3, 0, 12, 0, 11, 0, 12, 1, 12, 0, 5, 1, 4, 4, 5, 0, 5, 0, 0, 1, 4, 0, 0, 0)

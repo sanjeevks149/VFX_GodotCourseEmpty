@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://cvb1vgt52x0cy"]
+
+[ext_resource type="Script" uid="uid://dq7h3nectp4hy" path="res://Scripts/camera.gd" id="1_r84vf"]
+[ext_resource type="ArrayMesh" uid="uid://cmswy8js5ghvq" path="res://Models/Mountains.obj" id="2_tbjhe"]
+[ext_resource type="Texture2D" uid="uid://b02rembp6ylbv" path="res://Textures/Beam0.png" id="3_tbjhe"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_338y4"]
+sky_energy_multiplier = 0.65
+
+[sub_resource type="Sky" id="Sky_s2m6d"]
+sky_material = SubResource("ProceduralSkyMaterial_338y4")
+
+[sub_resource type="Environment" id="Environment_01qi8"]
+background_mode = 2
+background_energy_multiplier = 0.38
+sky = SubResource("Sky_s2m6d")
+glow_enabled = true
+glow_levels/6 = 0.13
+glow_levels/7 = 0.25
+glow_intensity = 0.1
+glow_blend_mode = 0
+glow_hdr_threshold = 0.5
+glow_hdr_scale = 1.5
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0811
+volumetric_fog_albedo = Color(0.243137, 0.243137, 0.243137, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_s4vrp"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 100.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_vf5wh"]
+size = Vector3(150, 0, 150)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4gkui"]
+size = Vector3(150, 1, 150)
+
+[sub_resource type="BoxMesh" id="BoxMesh_appbf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_530h6"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("3_tbjhe")
+
+[sub_resource type="Curve" id="Curve_74yy3"]
+_data = [Vector2(0, 0.49280572), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_aypq8"]
+_limits = [0.0, 3.5, 0.0, 1.0]
+_data = [Vector2(0.0027548224, 3.5), 0.0, 0.0, 0, 0, Vector2(0.24517904, 3.4999998), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_qgw32"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_kvh76"]
+curve_x = SubResource("Curve_74yy3")
+curve_y = SubResource("Curve_aypq8")
+curve_z = SubResource("Curve_qgw32")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vkdpk"]
+particle_flag_align_y = true
+spread = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+scale_min = 0.049999997
+scale_max = 0.25
+scale_curve = SubResource("CurveXYZTexture_kvh76")
+color = Color(1.9193509, 1.612798, 1.3539892, 1)
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.3
+collision_use_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_k56px"]
+
+[sub_resource type="Curve" id="Curve_tbjhe"]
+_data = [Vector2(0, 0.49280572), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qrex3"]
+_limits = [0.0, 3.5, 0.0, 1.0]
+_data = [Vector2(0.0027548224, 3.5), 0.0, 0.0, 0, 0, Vector2(0.24517904, 3.4999998), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_oqxbv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_2dco4"]
+curve_x = SubResource("Curve_tbjhe")
+curve_y = SubResource("Curve_qrex3")
+curve_z = SubResource("Curve_oqxbv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eepf5"]
+particle_flag_align_y = true
+spread = 15.0
+initial_velocity_min = 3.0
+initial_velocity_max = 10.0
+scale_min = 0.049999997
+scale_max = 0.25
+scale_curve = SubResource("CurveXYZTexture_2dco4")
+color = Color(0.51746565, 1.7574104, 1.9041495, 1)
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.67
+collision_use_scale = true
+
+[node name="World" type="Node3D" unique_id=937090145]
+
+[node name="Scene" type="Node" parent="." unique_id=737923154]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Scene" unique_id=521571351]
+environment = SubResource("Environment_01qi8")
+camera_attributes = SubResource("CameraAttributesPractical_s4vrp")
+
+[node name="Camera3D" type="Camera3D" parent="Scene/WorldEnvironment" unique_id=1966755761]
+transform = Transform3D(1, 0, 0, 0, 0.941294, 0.337588, 0, -0.337588, 0.941294, 0, 2.72096, 3.90772)
+script = ExtResource("1_r84vf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scene" unique_id=149578994]
+transform = Transform3D(1, 0, 0, 0, 0.84934, 0.527846, 0, -0.527846, 0.84934, 0, 2.9349, 0)
+light_energy = 0.5
+
+[node name="Mountains" type="MeshInstance3D" parent="Scene" unique_id=1202099105]
+transform = Transform3D(1, 0, 0, 0, 1.27348, 0, 0, 0, 1.26814, -22.157745, -3.8566482, -0.04744625)
+mesh = ExtResource("2_tbjhe")
+skeleton = NodePath("../..")
+
+[node name="Ground" type="StaticBody3D" parent="Scene" unique_id=555525301]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene/Ground" unique_id=1048172939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.34364235, 0)
+mesh = SubResource("BoxMesh_vf5wh")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene/Ground" unique_id=664616330]
+shape = SubResource("BoxShape3D_4gkui")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Scene/Ground" unique_id=5069041]
+transform = Transform3D(70, 0, 0, 0, 0.1, 0, 0, 0, 70, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="Scene" unique_id=1301286493]
+transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, -3.27909, -0.131935, 0)
+mesh = SubResource("BoxMesh_appbf")
+skeleton = NodePath("../..")
+
+[node name="Vfx_Sparks2" type="Node3D" parent="." unique_id=7680325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51129794, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Vfx_Sparks2" unique_id=1623881889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.34242705, 0)
+material_override = SubResource("StandardMaterial3D_530h6")
+amount = 40
+lifetime = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_vkdpk")
+draw_pass_1 = SubResource("QuadMesh_k56px")
+
+[node name="Vfx_Sparks3" type="Node3D" parent="." unique_id=186353097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14737141, -1.2953029)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Vfx_Sparks3" unique_id=539027315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85425645, -0.4653542)
+material_override = SubResource("StandardMaterial3D_530h6")
+amount = 40
+lifetime = 0.5
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_eepf5")
+draw_pass_1 = SubResource("QuadMesh_k56px")

@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://jf6lhabdtxqs"]
+
+[ext_resource type="Script" uid="uid://gs00msx4i83u" path="res://Scripts/SpawnProjectile.gd" id="1_idti0"]
+[ext_resource type="PackedScene" uid="uid://dio43qlpfb8jj" path="res://Prefabs/vfx_projectile01.tscn" id="2_idti0"]
+[ext_resource type="Script" uid="uid://dq7h3nectp4hy" path="res://Scripts/camera.gd" id="3_ynfkw"]
+[ext_resource type="ArrayMesh" uid="uid://cmswy8js5ghvq" path="res://Models/Mountains.obj" id="4_qjsfk"]
+[ext_resource type="Script" uid="uid://b86hxdolpatb8" path="res://Scripts/RotateToMouse2.gd" id="5_5wsiv"]
+[ext_resource type="PackedScene" uid="uid://dflym5vi8dvfe" path="res://Prefabs/Vfx_projectile01_muzzle.tscn" id="6_yjfcl"]
+[ext_resource type="PackedScene" uid="uid://b80pycp8puj71" path="res://Prefabs/Vfx_projectile01_imapact.tscn" id="7_ynfkw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_338y4"]
+sky_energy_multiplier = 0.65
+
+[sub_resource type="Sky" id="Sky_s2m6d"]
+sky_material = SubResource("ProceduralSkyMaterial_338y4")
+
+[sub_resource type="Environment" id="Environment_01qi8"]
+background_mode = 2
+background_energy_multiplier = 0.38
+sky = SubResource("Sky_s2m6d")
+glow_enabled = true
+glow_levels/6 = 0.13
+glow_levels/7 = 0.25
+glow_intensity = 0.1
+glow_blend_mode = 0
+glow_hdr_threshold = 0.5
+glow_hdr_scale = 1.5
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0811
+volumetric_fog_albedo = Color(0.243137, 0.243137, 0.243137, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_s4vrp"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 100.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_vf5wh"]
+size = Vector3(150, 0, 150)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4gkui"]
+size = Vector3(150, 1, 150)
+
+[sub_resource type="BoxMesh" id="BoxMesh_appbf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nckwn"]
+size = Vector3(1.34387, 1, 1)
+
+[node name="World" type="Node3D" unique_id=533534670 node_paths=PackedStringArray("rotate_to_mouse", "fire_point")]
+script = ExtResource("1_idti0")
+projectile_prefab = ExtResource("2_idti0")
+rotate_to_mouse = NodePath("Scene/CSGSphere3D")
+fire_point = NodePath("Scene/CSGSphere3D/CSGBox3D/FirePoint")
+
+[node name="Scene" type="Node" parent="." unique_id=1029134321]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Scene" unique_id=1754102536]
+environment = SubResource("Environment_01qi8")
+camera_attributes = SubResource("CameraAttributesPractical_s4vrp")
+
+[node name="Camera3D" type="Camera3D" parent="Scene/WorldEnvironment" unique_id=97637980]
+transform = Transform3D(1, 0, 0, 0, 0.941294, 0.337588, 0, -0.337588, 0.941294, 0, 2.72096, 3.90772)
+script = ExtResource("3_ynfkw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scene" unique_id=1460867474]
+transform = Transform3D(1, 0, 0, 0, 0.84934, 0.527846, 0, -0.527846, 0.84934, 0, 2.9349, 0)
+light_energy = 0.5
+
+[node name="Mountains" type="MeshInstance3D" parent="Scene" unique_id=661005514]
+transform = Transform3D(1, 0, 0, 0, 1.27348, 0, 0, 0, 1.26814, -21.5595, -3.87235, 0)
+mesh = ExtResource("4_qjsfk")
+skeleton = NodePath("../..")
+
+[node name="Ground" type="StaticBody3D" parent="Scene" unique_id=1620061179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene/Ground" unique_id=5900334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07397413, 0, 0)
+mesh = SubResource("BoxMesh_vf5wh")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene/Ground" unique_id=1282516225]
+shape = SubResource("BoxShape3D_4gkui")
+
+[node name="Wall" type="StaticBody3D" parent="Scene" unique_id=1182709054]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0298, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene/Wall" unique_id=245066981]
+transform = Transform3D(1, 0, 0, 0, 5.4, 0, 0, 0, 11, 0.470179, 1.658, 0)
+mesh = SubResource("BoxMesh_appbf")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene/Wall" unique_id=374638385]
+transform = Transform3D(1, 0, 0, 0, 5.4, 0, 0, 0, 11, 0.298243, 1.658, 0)
+shape = SubResource("BoxShape3D_nckwn")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Scene" unique_id=952685219]
+transform = Transform3D(0.714169, 0.238575, -0.658061, 0.196049, 0.834321, 0.515241, 0.671958, -0.496982, 0.549074, 3.08513, 6.69863, 4.07749)
+spot_range = 60.629
+spot_attenuation = 0.67
+spot_angle = 55.0
+spot_angle_attenuation = 2.82843
+
+[node name="Camera3D" type="Camera3D" parent="Scene" unique_id=1333343852]
+transform = Transform3D(0.827962, 0.25459, -0.499662, 0, 0.891007, 0.45399, 0.560784, -0.375887, 0.73772, -8.97652, 8.79728, 11.4697)
+current = true
+fov = 50.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Scene" unique_id=1339742064 node_paths=PackedStringArray("camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
+script = ExtResource("5_5wsiv")
+camera = NodePath("../Camera3D")
+rotation_speed = 50.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Scene/CSGSphere3D" unique_id=53911198]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -0.6)
+
+[node name="FirePoint" type="Node3D" parent="Scene/CSGSphere3D/CSGBox3D" unique_id=1845709056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0331)
+
+[node name="vfx_projectile" parent="." unique_id=1417165774 instance=ExtResource("2_idti0")]
+transform = Transform3D(-4.3711385e-08, -0.010471783, -0.9999451, 0, 0.99994504, -0.010471783, 0.99999994, -4.5773615e-10, -4.3708987e-08, 0, 0, 0)
+visible = false
+
+[node name="Projectile01_Muzzle" parent="." unique_id=1803090541 instance=ExtResource("6_yjfcl")]
+visible = false
+
+[node name="Projectile01_Imapact" parent="." unique_id=1058252970 instance=ExtResource("7_ynfkw")]
